@@ -10,7 +10,7 @@ const Hero = () => {
   return (
     <div className="relative pt-24 pb-32 flex content-center items-center justify-center min-h-screen">
       <div className="absolute top-0 w-full h-full bg-[url('./images/bg1.jpg')] bg-cover bg-center">
-        <span className="w-full h-full absolute opacity-50 bg-black"></span>
+        <span className="w-full left-0 h-full absolute opacity-50 bg-black"></span>
       </div>
       <div className="container relative mx-auto">
         <div className="items-center flex flex-wrap">
