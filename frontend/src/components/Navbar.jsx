@@ -47,7 +47,7 @@ const Navbar = () => {
                 <span className="text-amber-900">Welcome, </span>
                 <button
                   onClick={handleSignOut}
-                  className="bg-amber-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-amber-700 transition-colors"
+                  className="bg-amber-600 text-white px-2 py-2 rounded-md text-sm font-medium hover:bg-amber-700 transition-colors"
                 >
                   Sign Out
                 </button>
@@ -56,13 +56,13 @@ const Navbar = () => {
               <div className="space-x-4">
                 <Link
                   to="/SignIn"
-                  className="text-amber-900 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-amber-900 hover:text-amber-600 px-2 py-2 rounded-md text-sm font-medium"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/signup"
-                  className="bg-amber-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-amber-700 transition-colors"
+                  className="bg-amber-600 text-white px-2 py-2 rounded-md text-sm font-medium hover:bg-amber-700 transition-colors"
                 >
                   Sign Up
                 </Link>
