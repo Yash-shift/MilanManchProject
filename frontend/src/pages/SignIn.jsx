@@ -8,7 +8,7 @@ const SignIn = () => {
   
   const navigate = useNavigate();
   
-navigate('/about');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,13 +26,13 @@ navigate('/about');
           <h2 className="text-3xl font-bold text-amber-900 text-center mb-8">Sign In</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700"> Registered Email</label>
               <input
                 type="email"
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                className="mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
               />
             </div>
@@ -43,7 +43,7 @@ navigate('/about');
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                className="mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
               />
             </div>

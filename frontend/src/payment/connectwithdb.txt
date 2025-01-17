@@ -1,0 +1,225 @@
+import { useState } from 'react';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+const App = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [paymentAmount, setPaymentAmount] = useState('');
+  const [message, setMessage] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [payments, setPayments] = useState([]);
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      setMessage(data.message);
+      if (response.ok) {
+        setEmail('');
+        setPassword('');
+      }
+    } catch (error) {
+      setMessage('Registration failed. Please try again.');
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await response.json();
+      setMessage(data.message);
+      if (response.ok) {
+        setIsLoggedIn(true);
+        setUserId(data.userId); // Assuming backend sends userId
+        fetchPayments(data.userId);
+      }
+    } catch (error) {
+      setMessage('Login failed. Please try again.');
+    }
+  };
+
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    try {
+      const paymentData = {
+        userId,
+        paymentId: `pay_${Date.now()}`, // Simple unique ID generation
+        amount: parseFloat(paymentAmount),
+        currency: 'USD',
+        transactionDetails: {
+          method: 'credit_card',
+          timestamp: new Date().toISOString()
+        }
+      };
+
+      const response = await fetch('http://localhost:3000/payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData)
+      });
+      const data = await response.json();
+      setMessage(data.message);
+      if (response.ok) {
+        setPaymentAmount('');
+        fetchPayments(userId);
+      }
+    } catch (error) {
+      setMessage('Payment failed. Please try again.');
+    }
+  };
+
+  const fetchPayments = async (uid) => {
+    try {
+      const response = await fetch(`http://localhost:3000/payments/${uid}`);
+      const data = await response.json();
+      setPayments(data.payments);
+    } catch (error) {
+      setMessage('Failed to fetch payments.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 py-8 px-4">
+      <div className="max-w-md mx-auto space-y-6">
+        {message && (
+          <Alert className="mb-4">
+            <AlertDescription>{message}</AlertDescription>
+          </Alert>
+        )}
+
+        {!isLoggedIn ? (
+          <Tabs defaultValue="login">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="login">Login</TabsTrigger>
+              <TabsTrigger value="register">Register</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="login">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Login</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleLogin} className="space-y-4">
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button type="submit" className="w-full">Login</Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="register">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Register</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleRegister} className="space-y-4">
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button type="submit" className="w-full">Register</Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        ) : (
+          <>
+            <Card>
+              <CardHeader>
+                <CardTitle>Make a Payment</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handlePayment} className="space-y-4">
+                  <Input
+                    type="number"
+                    placeholder="Amount"
+                    value={paymentAmount}
+                    onChange={(e) => setPaymentAmount(e.target.value)}
+                    min="0"
+                    step="0.01"
+                  />
+                  <Button type="submit" className="w-full">Pay Now</Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Payment History</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {payments.map((payment) => (
+                    <div
+                      key={payment.paymentId}
+                      className="p-4 border rounded-lg"
+                    >
+                      <div className="flex justify-between">
+                        <span>Amount: ${payment.amount}</span>
+                        <span className="text-green-600">{payment.status}</span>
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        ID: {payment.paymentId}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                setIsLoggedIn(false);
+                setUserId(null);
+                setPayments([]);
+              }}
+            >
+              Logout
+            </Button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;

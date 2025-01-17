@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ReCAPTCHA from "react-google-recaptcha";
+// 6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9  site key
+// 6Le4QLoqAAAAABteXVNy3jT_V9VrZpzuoKeIirU9   secret key
 
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const[number, setNumber] = useState('');
+  const [confirm ,setconfirm] = useState('');
   // const[errors,setErrors] = useState();
- 
+  const [captchaValue, setCaptchaValue] = useState(null);
+  const handleCaptcha = (value) => {
+    setCaptchaValue(value);
+  };
   const navigate = useNavigate();
   // const validateForm=()=>{}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if  (!captchaValue) {
+        alert("Please verify the CAPTCHA");
+      }
       // await signUp(email, password, name);
       // navigate('/');
       // const isValid = validateForm();
@@ -41,7 +52,7 @@ const SignUp = () => {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                className="mt-1 block w-full rounded-md p-1 border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
               />
             </div>
@@ -52,10 +63,22 @@ const SignUp = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                className="mt-1 block w-full rounded-md  p-1 border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
               />
             </div>
+            <div>
+              <label htmlFor="number" className="block text-sm font-medium text-gray-700">Phone Number</label>
+              <input
+                type="Phonenumber"
+                id="number"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 p-1 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                required
+              />
+            </div>
+            
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
               <input
@@ -63,10 +86,27 @@ const SignUp = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                className="mt-1 block w-full rounded-md border-gray-300 p-1 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
               />
             </div>
+            <div>
+              <label htmlFor="confirm" className="block text-sm font-medium text-gray-700">Confirm Password</label>
+              <input
+                type="password"
+                id="confirm"
+                value={confirm}
+                onChange={(e) => setconfirm(e.target.value)}
+                className="mt-1 block w-full rounded-md border-gray-300 p-1 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+                required
+              />
+            </div>
+            <div className="mb-4">
+          <ReCAPTCHA
+            sitekey="6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9"
+            onChange={handleCaptcha}
+          />
+        </div>
             <button
               type="submit"
               className="w-full bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700 transition-colors"

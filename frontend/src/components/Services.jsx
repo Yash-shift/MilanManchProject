@@ -24,23 +24,24 @@ const Services = () => {
       description:
         "Host Birthday, Anniversary and other special events in style.",
     },
-    {
-      icon: <Camera className="h-8 w-8 text-amber-600" />,
-      title: "Photography",
-      description: "Capturing your precious moments forever",
-    },
+    // {
+    //   icon: <Camera className="h-8 w-8 text-amber-600" />,
+    //   title: "Photography",
+    //   description: "Capturing your precious moments forever",
+    // },
   ];
 
   return (
     <div className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-amber-900 mb-16">
+          <h2 className="text-3xl font-bold text-amber-900 mb-16 relative group">
             Our Services
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8"></span>
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <NavLink to={feature.link}>
               <div

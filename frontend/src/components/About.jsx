@@ -25,7 +25,7 @@ const About = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 1000);
+    }, 30000);
     return () => clearInterval(timer);
   }, []);
 

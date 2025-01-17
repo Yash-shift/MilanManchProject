@@ -1,0 +1,27 @@
+# Create a payment
+curl -X POST http://localhost:3000/payment \
+-H "Content-Type: application/json" \
+-d '{
+    "userId": "user_id_here",
+    "paymentId": "payment_123",
+    "amount": 99.99,
+    "currency": "USD",
+    "transactionDetails": {
+        "method": "credit_card",
+        "last4": "4242"
+    }
+}'
+
+# Get user payments
+curl http://localhost:3000/payments/user_id_here
+
+
+# Register a new user
+curl -X POST http://localhost:3000/register \
+-H "Content-Type: application/json" \
+-d '{"email": "test@example.com", "password": "mypassword"}'
+
+# Login
+curl -X POST http://localhost:3000/login \
+-H "Content-Type: application/json" \
+-d '{"email": "test@example.com", "password": "mypassword"}'
