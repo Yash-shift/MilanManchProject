@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
 import { Crown } from 'lucide-react';
-import logo from '../images/Main_logo.gif';
+import logo from '../images/logomain.jpg';
 
 
 const Navbar = () => {
@@ -19,23 +19,23 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
-            <Crown className="h-8 w-8 text-amber-600" />
-            {/* <img className="h-8 w-8 text-amber-600" src={logo} alt="Milan Manch Logo" /> */}
+            {/* <Crown className="h-8 w-8 text-amber-600" /> */}
+            <img className="h-14 w-14 text-amber-600" src={logo} alt="Milan Manch Logo" />
             <span className="ml-2 text-2xl font-bold text-amber-900">Milan Manch</span>
           </Link>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link to="/" className="text-amber-900 hover:text-amber-600  px-3 py-2 rounded-md text-sm font-medium relative group">
                 Home
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-700 group-hover:w-full"></span>
               </Link>
               <Link to="/events" className="text-amber-900 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium relative group">
                 Events
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-700 group-hover:w-full"></span>
               </Link>
               <Link to="/contact" className="text-amber-900 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium relative group">
                 Contact
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-700 group-hover:w-full"></span>
               </Link>
             
             </div>

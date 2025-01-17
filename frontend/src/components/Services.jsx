@@ -37,7 +37,7 @@ const Services = () => {
         <div className="text-center">
           <h2 className="text-3xl font-bold text-amber-900 mb-16 relative group">
             Our Services
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8"></span>
+            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8 group-hover:mt-3 "></span>
           </h2>
         </div>
 
@@ -46,12 +46,16 @@ const Services = () => {
             <NavLink to={feature.link}>
               <div
                 key={index}
-                className="p-6 bg-amber-50 rounded-xl hover:shadow-lg transition-shadow"
+                className="p-6 bg-amber-50 rounded-xl hover:shadow-xl transition-shadow relative group "
               >
                 <div className="flex justify-center mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold text-amber-900 text-center mb-2">
+                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8 "></span>
+
                   {feature.title}
+                 
                 </h3>
+                
 
                 <p className="text-gray-600 text-center">
                   {feature.description}
