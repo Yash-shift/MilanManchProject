@@ -11,6 +11,7 @@ import Wedding from "./pages/Wedding";
 import Social from "./pages/Social";
 import Corporate from "./pages/Corporate";
 import PaymentGateway from "./payment/Payment"
+import BookingPage from "./pages/BookingPage";
 import {
   BrowserRouter,
   Routes,
@@ -35,6 +36,7 @@ function App() {
         <Route path="/corporate" element={<Corporate />} />
         <Route path="services" element={<Services />} />
         <Route path="/payment" element={<PaymentGateway />} />
+        <Route path="/booking" element={<BookingPage />} />
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       

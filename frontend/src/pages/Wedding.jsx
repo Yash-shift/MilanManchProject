@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Users2, Utensils, Music, Camera } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Wedding = () => {
   const features = [
@@ -36,6 +36,7 @@ const Wedding = () => {
         description: "Organize seamless and elegant weddings with our efficient planning services.",
       },
   ];
+  const navigate=useNavigate()
 
   return (
     <div className="py-24 bg-white">
@@ -45,7 +46,7 @@ const Wedding = () => {
             Types of Wedding
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8  " onClick={()=>navigate("/booking")}>
           {features.map((feature, index) => (
             <div
               key={index}

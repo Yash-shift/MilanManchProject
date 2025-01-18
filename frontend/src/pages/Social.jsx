@@ -109,7 +109,7 @@
 // export default Wedding;
 import React from "react";
 import { Users2, Utensils, Music, Camera } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Social=() => {
   const features = [
@@ -143,6 +143,8 @@ const Social=() => {
       },
   ];
 
+  const navigate=useNavigate()
+
   return (
     <div className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -151,7 +153,7 @@ const Social=() => {
             Types of Wedding
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" onClick={()=>navigate("/booking")}>
           {features.map((feature, index) => (
             <div
               key={index}

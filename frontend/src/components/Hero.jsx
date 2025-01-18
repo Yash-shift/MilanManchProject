@@ -134,14 +134,15 @@ const Hero = () => {
                   <p className=" mb-8 text-lg text-gray-300">
                     {slide.description}
                   </p>
-                  <div className="flex gap-4">
+                  <div className="flex gap-4  " href='#Services'>
                     <button
-                      onClick={goToServices}
+                      // onClick={goToServices}
+                      
                       className="border bg-white   border-white text-amber-600 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 hover:text-amber-300 transition-all hover:scale-105"
                     >
                       Browse Events
                     </button>
-                    <button className="border bg-white   border-white text-amber-600 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 hover:text-amber-300 transition-all hover:scale-105">
+                    <button onClick={() =>Navigate("/booking")} className="border bg-white   border-white text-amber-600 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 hover:text-amber-300 transition-all hover:scale-105">
                       Create Event
                     </button>
                   </div>
