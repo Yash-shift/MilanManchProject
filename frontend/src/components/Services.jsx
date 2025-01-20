@@ -1,11 +1,11 @@
 import React from "react";
-import { Users2, Utensils, Music, Camera } from "lucide-react";
+import { Users2, Utensils, Music, Camera,Cake,PartyPopper,Gift } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const Services = () => {
   const features = [
     {
-      icon: <Utensils className="h-8 w-8 text-amber-600" />,
+      icon: <PartyPopper className="h-8 w-8 text-amber-600" />,
       title: "Wedding Planning",
       description:
         "Turn your dream into a reality with our expert planning and execution.",
@@ -14,11 +14,11 @@ const Services = () => {
     {
       icon: <Users2 className="h-8 w-8 text-amber-600" />,
       title: "Corporate Events",
-      link: "/corporate",
+      // link: "/corporate",
       description: "Professional events tailored for your corporate needs.",
     },
     {
-      icon: <Music className="h-8 w-8 text-amber-600" />,
+      icon: <Gift className="h-8 w-8 text-amber-600" />,
       title: "Social Gathering",
       link: "/social",
       description:
@@ -32,12 +32,12 @@ const Services = () => {
   ];
 
   return (
-    <div id="Services" className="py-24 bg-white">
+    <div id="services" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-amber-900 mb-16 relative group">
             Our Services
-            <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8 group-hover:mt-3 "></span>
+            {/* <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8 group-hover:mt-3 "></span> */}
           </h2>
         </div>
 
@@ -50,7 +50,7 @@ const Services = () => {
               >
                 <div className="flex justify-center mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold text-amber-900 text-center mb-2">
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8 "></span>
+                {/* <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-1000 group-hover:w-full group-hover:h-0.8 "></span> */}
 
                   {feature.title}
                  

@@ -43,28 +43,36 @@
 
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState, useCallback } from "react";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 import { Navigate } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 const heroSlides = [
   {
-    title: "Discover & Create Unforgettable Events",
+    title: "Welcome to Milan Manch ",
+    description:
+      "Your event deserves the best, and we deliver nothing less. Seamless planning, stunning designs, and lasting memories – all tailored to you.",
+    image:
+      "https://images.unsplash.com/photo-1522413452208-996ff3f3e740?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Memorable Events Start with Us.",
     description:
       "Find and organize events that fuel your passions and create lasting memories. From conferences to concerts, we've got you covered.",
     image:
       "https://images.unsplash.com/photo-1513623935135-c896b59073c1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    title: "Connect with Like-minded People",
+    title: "Crafting Moments, Creating Memories – Your Event, Our Expertise!",
     description:
-      "Join a vibrant community of event enthusiasts and professionals. Network, learn, and grow together.",
+      "Your dream event, our responsibility your one-stop solution for all event management needs.",
     image:
       "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "Host Events That Matter",
     description:
-      "Transform your ideas into successful events. Our platform provides all the tools you need to create impactful experiences.",
+      "Making your celebration stress-free and unforgettable with expert planning and a touch of magic. We handle the details, you enjoy the moments.",
     image:
       "https://images.unsplash.com/photo-1505236858219-8359eb29e329?auto=format&fit=crop&q=80&w=1920",
   },
@@ -134,14 +142,14 @@ const Hero = () => {
                   <p className=" mb-8 text-lg text-gray-300">
                     {slide.description}
                   </p>
-                  <div className="flex gap-4  " href='#Services'>
-                    <button
+                  <div className="flex gap-4  " >
+                    <AnchorLink href="#services"><button
                       // onClick={goToServices}
                       
                       className="border bg-white   border-white text-amber-600 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 hover:text-amber-300 transition-all hover:scale-105"
                     >
-                      Browse Events
-                    </button>
+                      Browse Services
+                    </button></AnchorLink>
                     <button onClick={() =>Navigate("/booking")} className="border bg-white   border-white text-amber-600 px-6 py-3 rounded-lg font-semibold hover:bg-white/10 hover:text-amber-300 transition-all hover:scale-105">
                       Create Event
                     </button>

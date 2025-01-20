@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ReCAPTCHA from "react-google-recaptcha";
+
 
 
 const SignIn = () => {
@@ -7,6 +9,11 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   
   const navigate = useNavigate();
+
+  const [captchaValue, setCaptchaValue] = useState(null);
+  const handleCaptcha = (value) => {
+    setCaptchaValue(value);
+  };
   
 
 
@@ -45,6 +52,12 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
+              />
+            </div>
+            <div className="mb-4">
+              <ReCAPTCHA
+                sitekey="6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9"
+                onChange={handleCaptcha}
               />
             </div>
             <button

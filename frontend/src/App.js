@@ -34,7 +34,7 @@ function App() {
         <Route path="/social" element={<Social />} />
         <Route path="/wedding" element={<Wedding />} />
         <Route path="/corporate" element={<Corporate />} />
-        <Route path="services" element={<Services />} />
+        <Route path="/services" element={<Services />} />
         <Route path="/payment" element={<PaymentGateway />} />
         <Route path="/booking" element={<BookingPage />} />
         {/* <Route path="*" element={<NotFound />} /> */}
