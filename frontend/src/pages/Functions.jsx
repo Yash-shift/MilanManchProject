@@ -15,39 +15,47 @@ const Wedding = () => {
   const features = [
     {
       icon: <PartyPopper className="h-8 w-8 text-amber-600" />,
-      title: "Traditional Hindu Wedding",
+      title: "Lagna Patrika",
       description:
-        "Experience the beauty and rituals of a traditional Hindu wedding.",
-      link: "/functions",
+        "Sealing the Bond of Love and Tradition – Your Invitation to a New Beginning!",
+      link: "/booking",
     },
     {
       icon: <Home className="h-8 w-8 text-amber-600" />,
-      title: "Destination Wedding",
+      title: "Haldi Ceremony",
       description:
-        "Plan your perfect wedding at breathtaking locations around the world.",
+        "Application of turmeric paste on the bride and groom for purification and radiance.",
         
-      link: "/functions"
+      link: "/booking"
     },
     {
       icon: <Music className="h-8 w-8 text-amber-600" />,
-      title: "Themed Wedding",
+      title: "Mehendi Ceremony",
       description:
-        "Create unforgettable memories with unique themes and creative designs.",
-      link: "/functions"
+        "Henna application on the bride’s hands and feet, symbolizing beauty and joy.",
+      link: "/booking"
     },
     {
       icon: <PartyPopper className="h-8 w-8 text-amber-600" />,
       title: "Same-Day Wedding",
       description:
         "Organize seamless and elegant weddings with our efficient planning services.",
-      link: "/functions"
+      link: "/booking"
     },
     {
       icon: <HeartIcon className="h-8 w-8 text-amber-600" />,
-      title: "Nikah",
+      title: "Sangeet Ceremony",
+      link: "/booking",
       description:
-        "Organize seamless and elegant weddings with our efficient planning services.",
+        "A musical night filled with dance, songs, and celebrations involving family and friends.",
     },
+    {
+        icon: <Cake className="h-8 w-8 text-amber-600" />,
+        title: "Barat",
+        description:
+          "The groom’s procession to the wedding venue, accompanied by music and dancing.",
+        link: "/booking"
+      },
   ];
   const navigate = useNavigate();
 

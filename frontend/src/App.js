@@ -12,6 +12,7 @@ import Social from "./pages/Social";
 import Corporate from "./pages/Corporate";
 import PaymentGateway from "./payment/Payment"
 import BookingPage from "./pages/BookingPage";
+import Functions from "./pages/Functions";
 import {
   BrowserRouter,
   Routes,
@@ -37,6 +38,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/payment" element={<PaymentGateway />} />
         <Route path="/booking" element={<BookingPage />} />
+        <Route path="/functions" element={<Functions/>} />
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       
