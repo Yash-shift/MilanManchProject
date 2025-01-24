@@ -108,8 +108,9 @@
 // }
 // export default Wedding;
 import React from "react";
-import { Users2, Utensils, Music, Camera } from "lucide-react";
+import { Users2, Utensils, Music, Camera ,HeartHandshakeIcon,PartyPopper,CakeIcon,GlassWater, Cake, Heart,} from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import BackButton from "../components/BackButton";
 
 const Social=() => {
   const features = [
@@ -132,13 +133,38 @@ const Social=() => {
         "Create unforgettable memories with unique themes and creative designs.",
     },
     {
-      icon: <Camera className="h-8 w-8 text-amber-600" />,
+      icon: <CakeIcon className="h-8 w-8 text-amber-600" />,
       title: "Roka Ceremony",
       description: "Organize seamless and elegant weddings with our efficient planning services.",
     },
     {
+        icon: <PartyPopper className="h-8 w-8 text-amber-600" />,
+        title: "Naming Ceremony",
+        description: "Organize seamless and elegant weddings with our efficient planning services.",
+      },
+      {
+        icon: <HeartHandshakeIcon className="h-8 w-8 text-amber-600" />,
+        title: "House Warming",
+        description: "Organize seamless and elegant weddings with our efficient planning services.",
+      },
+      {
         icon: <Camera className="h-8 w-8 text-amber-600" />,
-        title: "Baby Shower (Godh Bharai)",
+        title: "Promotion Celebration",
+        description: "Organize seamless and elegant weddings with our efficient planning services.",
+      },
+      {
+        icon: <Cake className="h-8 w-8 text-amber-600" />,
+        title: "Retiremnt Party",
+        description: "Organize seamless and elegant weddings with our efficient planning services.",
+      },
+      {
+        icon: <Users2 className="h-8 w-8 text-amber-600" />,
+        title: "Reunions",
+        description: "Organize seamless and elegant weddings with our efficient planning services.",
+      },
+      {
+        icon: <Heart className="h-8 w-8 text-amber-600" />,
+        title: "Farewell",
         description: "Organize seamless and elegant weddings with our efficient planning services.",
       },
   ];
@@ -147,10 +173,11 @@ const Social=() => {
 
   return (
     <div className="py-24 bg-white">
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-amber-900 mb-16">
-            Types of Wedding
+            Social Events.
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" onClick={()=>navigate("/booking")}>

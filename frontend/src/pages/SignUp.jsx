@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
+import BackButton from "../components/BackButton";
 // 6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9  site key
 // 6Le4QLoqAAAAABteXVNy3jT_V9VrZpzuoKeIirU9   secret key
 
@@ -40,6 +41,7 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen pt-20 pb-16 flex items-center bg-amber-50">
+      
       <div className="max-w-md w-full mx-auto px-4">
         <div className="bg-white p-8 rounded-xl shadow-lg">
           <h2 className="text-3xl font-bold text-amber-900 text-center mb-8">
