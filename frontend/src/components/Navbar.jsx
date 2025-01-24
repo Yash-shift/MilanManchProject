@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Crown } from "lucide-react";
 import logo from "../images/LogoWebsite.gif";
 import AnchorLink from "react-anchor-link-smooth-scroll";
@@ -14,13 +14,13 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md  w-full z-50 border-b border-amber-100 bg-white shadow-md sticky top-0">
+    <nav className="bg-white/80 backdrop-blur-md  w-full z-50 border-b border-amber-100 shadow-md sticky top-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center">
             {/* <Crown className="h-8 w-8 text-amber-600" /> */}
             <img
-              className="h-16 w-16 text-amber-600"
+              className="h-16 w-16 text-amber-600  rounded-full"
               src={logo}
               alt="Milan Manch Logo"
             />
@@ -37,13 +37,15 @@ const Navbar = () => {
                 Home
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-700 group-hover:w-full"></span>
               </Link>
+              <Link to="/services">
               <AnchorLink
                 href="#services"
                 className="text-amber-900 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium relative group"
+                
               >
                 Services
                 <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-amber-600 transition-all duration-700 group-hover:w-full"></span>
-              </AnchorLink>
+              </AnchorLink></Link>
               <Link
                 to="/contact"
                 className="text-amber-900 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-medium relative group"

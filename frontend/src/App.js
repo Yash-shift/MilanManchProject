@@ -19,6 +19,9 @@ import {
   Route,Router
 } from "react-router-dom";
 import SignUp from "./pages/SignUp";
+import BackButton from "./components/BackButton";
+import sameday from "./pages/WeddingSubTypes/SameDay";
+import Sameday from "./pages/WeddingSubTypes/SameDay";
 
 function App() {
   return (
@@ -26,6 +29,8 @@ function App() {
      
       
       <Navbar></Navbar>
+      
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
@@ -39,6 +44,7 @@ function App() {
         <Route path="/payment" element={<PaymentGateway />} />
         <Route path="/booking" element={<BookingPage />} />
         <Route path="/functions" element={<Functions/>} />
+        <Route path="/sameday" element={<Sameday/>}/>
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       
