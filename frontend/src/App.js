@@ -22,36 +22,34 @@ import SignUp from "./pages/SignUp";
 import BackButton from "./components/BackButton";
 import sameday from "./pages/WeddingSubTypes/SameDay";
 import Sameday from "./pages/WeddingSubTypes/SameDay";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
-    <div className="App gap-5-">
-     
-      
-      <Navbar></Navbar>
-      
-      
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp/>} />
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/aboutus" element={<About />} />
-        <Route path="/social" element={<Social />} />
-        <Route path="/wedding" element={<Wedding />} />
-        <Route path="/corporate" element={<Corporate />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/payment" element={<PaymentGateway />} />
-        <Route path="/booking" element={<BookingPage />} />
-        <Route path="/functions" element={<Functions/>} />
-        <Route path="/sameday" element={<Sameday/>}/>
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
-      
-      
-
-      <Footer></Footer>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <div className="App gap-5-">
+          <Navbar></Navbar>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp/>} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/aboutus" element={<About />} />
+            <Route path="/social" element={<Social />} />
+            <Route path="/wedding" element={<Wedding />} />
+            <Route path="/corporate" element={<Corporate />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/payment" element={<PaymentGateway />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/functions" element={<Functions/>} />
+            <Route path="/sameday" element={<Sameday/>}/>
+            {/* <Route path="*" element={<NotFound />} /> */}
+          </Routes>
+          <Footer></Footer>
+        </div>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
