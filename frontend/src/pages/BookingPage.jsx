@@ -1,19 +1,142 @@
 import React, { useState } from "react";
-import { Calendar, MapPin, Users } from "lucide-react";
-import BackButton from "../components/BackButton";
+import {
+  Calendar,
+  MapPin,
+  Users,
+  Utensils,
+  User,
+  Phone,
+  Flower,
+  Ticket,
+} from "lucide-react";
 
 const EventBookingForm = () => {
   const [formData, setFormData] = useState({
+    groomName: "",
+    brideName: "",
+    contactPersonName: "",
+    contactNumber: "",
     eventType: "",
     eventDate: "",
-    venue: "",
+
+    state: "",
+    city: "",
+    menuType: "",
+    totalMembers: "",
+    stageDecoration: "",
     selectedMenuItems: [],
+    selectedItems: {
+      starters: [],
+      mainCourse: [],
+      beverages: [],
+      dessert: [],
+    },
     decorationtype: "",
   });
 
-  const [needVenue, setNeedVenue] = useState(false);
+  const menuOptions = {
+    veg: {
+      starters: [
+        "Paneer Tikka",
+        "Veg Spring Rolls",
+        "Mushroom Manchurian",
+        "Corn Cheese Balls",
+        "Crispy Vegetables",
+        "Hara Bhara Kebab",
+      ],
+      mainCourse: [
+        "Dal Makhani",
+        "Paneer Butter Masala",
+        "Veg Biryani",
+        "Palak Paneer",
+        "Mixed Veg Curry",
+        "Malai Kofta",
+        "Jeera Rice",
+        "Butter Naan",
+        "Garlic Roti",
+      ],
+      beverages: [
+        "Fresh Lime Soda",
+        "Masala Chai",
+        "Coffee",
+        "Mango Lassi",
+        "Buttermilk",
+        "Fresh Fruit Juice",
+        "Virgin Mojito",
+      ],
+      dessert: [
+        "Gulab Jamun",
+        "Rasmalai",
+        "Ice Cream",
+        "Gajar Ka Halwa",
+        "Kheer",
+        "Jalebi",
+        "Kulfi",
+      ],
+    },
+    Nonveg: {
+      starters: [
+        "Chicken pop",
+        "Veg Spring Rolls",
+        "Mushroom Manchurian",
+        "Corn Cheese Balls",
+        "Crispy Vegetables",
+        "Hara Bhara Kebab",
+      ],
+      mainCourse: [
+        "Dal Makhani",
+        "Paneer Butter Masala",
+        "Veg Biryani",
+        "Palak Paneer",
+        "Mixed Veg Curry",
+        "Malai Kofta",
+        "Jeera Rice",
+        "Butter Naan",
+        "Garlic Roti",
+      ],
+      beverages: [
+        "Fresh Lime Soda",
+        "Masala Chai",
+        "Coffee",
+        "Mango Lassi",
+        "Buttermilk",
+        "Fresh Fruit Juice",
+        "Virgin Mojito",
+      ],
+      dessert: [
+        "Gulab Jamun",
+        "Rasmalai",
+        "Ice Cream",
+        "Gajar Ka Halwa",
+        "Kheer",
+        "Jalebi",
+        "Kulfi",
+      ],
+    },
+  };
+
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleMenuSelection = (category, item) => {
+    setFormData((prev) => ({
+      ...prev,
+      selectedItems: {
+        ...prev.selectedItems,
+        [category]: prev.selectedItems[category].includes(item)
+          ? prev.selectedItems[category].filter((i) => i !== item)
+          : [...prev.selectedItems[category], item],
+      },
+    }));
+  };
 
   const handleStateChange = (state) => {
     setSelectedState(state);
@@ -21,6 +144,16 @@ const EventBookingForm = () => {
   };
 
   const decorationTypes = [
+    "Floral",
+    "Vintage",
+    "Luxury",
+    "Traditional",
+    "Fairy_lights",
+    "Modern",
+    "Minimalist",
+    "Royal",
+  ];
+  const stageDecorations = [
     "Floral",
     "Vintage",
     "Luxury",
@@ -46,63 +179,32 @@ const EventBookingForm = () => {
     "Baby Showers",
   ];
 
-  const states = ["Delhi", "UttarPradesh", "Rajasthan"];
-
-  const cities = {
-    Delhi: ["Rohini", "Saket", "Okhla"],
-    UttarPradesh: ["Noida", "GreaterNoida", "Ghaziabad"],
-    Rajasthan: ["Jaipur", "Alwar", "Rampur"],
+  const locations = {
+    Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
+    Karnataka: ["Bangalore", "Mysore", "Hubli", "Mangalore", "Belgaum"],
+    "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Trichy"],
+    Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"],
+    Delhi: [
+      "New Delhi",
+      "North Delhi",
+      "South Delhi",
+      "East Delhi",
+      "West Delhi",
+    ],
   };
+  const serviceCategories = [
+    {
+      icon: <Ticket className="w-10 h-10 text-blue-600 mb-4" />,
+      title: "Inclusive services",
+      features: [
+        "Printed invitation cards.",
+        "Capture moments.",
+        "All Royal decoration and arrangements.",
 
-  const venues = [
-    { id: 1, name: "Grand Ballroom", capacity: 300, price: 2000 },
-    { id: 2, name: "Garden Pavilion", capacity: 150, price: 1500 },
-    { id: 3, name: "Rooftop Terrace", capacity: 100, price: 1200 },
-    { id: 4, name: "Crystal Hall", capacity: 200, price: 1800 },
+        "All fun and entertainment",
+      ],
+    },
   ];
-
-  const menuItems = {
-    vegetarianStarters: [
-      { id: 1, name: "Paneer Tikka", price: 12 },
-      { id: 2, name: "Vegetable Spring Rolls", price: 10 },
-      { id: 3, name: "Mushroom Manchurian", price: 11 },
-      { id: 4, name: "Crispy Corn", price: 9 },
-      { id: 5, name: "Veg Seekh Kebab", price: 10 },
-    ],
-    vegetarianMain: [
-      { id: 6, name: "Vegetable Biryani", price: 18 },
-      { id: 7, name: "Palak Paneer", price: 16 },
-      { id: 8, name: "Dal Makhani", price: 14 },
-      { id: 9, name: "Mixed Vegetable Curry", price: 15 },
-      { id: 10, name: "Veg Noodles", price: 14 },
-    ],
-    nonVegStarters: [
-      { id: 11, name: "Chicken Tikka", price: 15 },
-      { id: 12, name: "Fish Amritsari", price: 16 },
-      { id: 13, name: "Seekh Kebab", price: 14 },
-      { id: 14, name: "Tandoori Wings", price: 13 },
-      { id: 15, name: "Prawn Tempura", price: 18 },
-    ],
-    nonVegMain: [
-      { id: 16, name: "Butter Chicken", price: 20 },
-      { id: 17, name: "Mutton Rogan Josh", price: 22 },
-      { id: 18, name: "Fish Curry", price: 21 },
-      { id: 19, name: "Chicken Biryani", price: 19 },
-      { id: 20, name: "Grilled Fish", price: 23 },
-    ],
-    desserts: [
-      { id: 21, name: "Gulab Jamun", price: 8 },
-      { id: 22, name: "Rice Kheer", price: 7 },
-      { id: 23, name: "Ice Cream", price: 6 },
-      { id: 24, name: "Fruit Trifle", price: 8 },
-    ],
-    beverages: [
-      { id: 25, name: "Soft Drinks Package", price: 8 },
-      { id: 26, name: "Fresh Juice Selection", price: 10 },
-      { id: 27, name: "Coffee & Tea Service", price: 6 },
-      { id: 28, name: "Masala Chaas", price: 5 },
-    ],
-  };
 
   const handleMenuChange = (menuId) => {
     setFormData((prev) => ({
@@ -113,50 +215,8 @@ const EventBookingForm = () => {
     }));
   };
 
-  const calculateTotal = () => {
-    const venuePrice =
-      venues.find((v) => v.name === formData.venue)?.price || 0;
-    const menuTotal = formData.selectedMenuItems.reduce((sum, itemId) => {
-      const allItems = [
-        ...menuItems.vegetarianStarters,
-        ...menuItems.vegetarianMain,
-        ...menuItems.nonVegStarters,
-        ...menuItems.nonVegMain,
-        ...menuItems.desserts,
-        ...menuItems.beverages,
-      ];
-      const item = allItems.find((m) => m.id === itemId);
-      return sum + (item?.price || 0);
-    }, 0);
-    return venuePrice + menuTotal;
-  };
-
-  const renderMenuItems = (items) => (
-    <div className="grid md:grid-cols-2 gap-4">
-      {items.map((item) => (
-        <label
-          key={item.id}
-          className="flex items-center justify-between p-2 hover:bg-amber-100 rounded cursor-pointer"
-        >
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={formData.selectedMenuItems.includes(item.id)}
-              onChange={() => handleMenuChange(item.id)}
-              className="rounded"
-            />
-            <div>{item.name}</div>
-          </div>
-          {/* <span className="font-medium">${item.price}</span> */}
-        </label>
-      ))}
-    </div>
-  );
-
   return (
-    
     <div className="w-full mx-auto p-6 bg-amber-50">
-      {/* <BackButton></BackButton> */}
       <div className="max-w-3xl w-full rounded-sm hover:shadow-lg mx-auto px-4 bg-white">
         <div className="p-6 border-b">
           <h1 className="text-3xl font-bold text-amber-900 text-center ">
@@ -177,77 +237,117 @@ const EventBookingForm = () => {
               }
               required
             >
-              <option value="">Select Event Type</option>
+              <option className="text-gray-700 text-sm" value="">
+                Select Event Type
+              </option>
               {eventTypes.map((type) => (
-                <option key={type} value={type}>
+                <option className="text-gray-700" key={type} value={type}>
                   {type}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* Event Date */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 pb-1">
-              Event Date *
+          {/* Couple Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="transform transition-all duration-300 hover:scale-[1.01]">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <input
+                  type="text"
+                  name="groomName"
+                  value={formData.groomName}
+                  onChange={handleInputChange}
+                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+            </div>
+            <div className="transform transition-all duration-300 hover:scale-[1.01]">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Contact Number
+              </label>
+              <div className="relative">
+                <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <input
+                  type="tel"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleInputChange}
+                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                  placeholder="Enter contact number"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          
+
+          {/* Wedding Date */}
+          <div className="transform transition-all duration-300 hover:scale-[1.01]">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Wedding Date
             </label>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-gray-500" />
+            <div className="relative">
+              <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
               <input
                 type="date"
-                className="w-full p-2 border rounded-md"
-                value={formData.eventDate}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    eventDate: e.target.value,
-                  }))
-                }
+                name="weddingDate"
+                value={formData.weddingDate}
+                onChange={handleInputChange}
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
                 required
               />
             </div>
           </div>
 
-           {/* Total members */}
-           <div>
-            <label
-              htmlFor="members"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Total Members
+          {/* Total Members */}
+          <div className="transform transition-all duration-300 hover:scale-[1.01]">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Total Guests
             </label>
-            <input
-              type="number"
-              id="members"
-              className="w-full p-2 border rounded-md mt-1"
-              // className="mt-1 block w-full rounded-md p-1 border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
-              required
-            />
+            <div className="relative">
+              <Users className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <input
+                type="number"
+                name="totalMembers"
+                value={formData.totalMembers}
+                onChange={handleInputChange}
+                min="1"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                placeholder="Enter number of guests"
+                required
+              />
+            </div>
           </div>
 
-           {/*Decoration Selection */}
-           <div>
-            <label className="block text-sm font-medium text-gray-700 pb-1">
-              Select Decoration Design *
+          {/* Stage Decoration */}
+          <div className="transform transition-all duration-300 hover:scale-[1.01]">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Stage Decoration Theme
             </label>
-            <select
-              className="w-full p-2 border rounded-md"
-              value={formData.decorationtype}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  decorationtype: e.target.value,
-                }))
-              }
-              required
-            >
-              <option value="">Select decoration style</option>
-              {decorationTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <Flower className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <select
+                name="stageDecoration"
+                value={formData.stageDecoration}
+                onChange={handleInputChange}
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                required
+              >
+                <option value="">Select Stage Decoration</option>
+                {stageDecorations.map((theme) => (
+                  <option key={theme} value={theme}>
+                    {theme}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
           {/* Invitation Card */}
@@ -269,178 +369,186 @@ const EventBookingForm = () => {
           </div>
 
           {/* Venue Selection */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 pb-1">
-              Venue Required *
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="transform transition-all duration-300 hover:scale-[1.01]">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                State
+              </label>
+              <div className="relative">
+                <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                <select
+                  name="state"
+                  value={formData.state}
+                  onChange={handleInputChange}
+                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                  required
+                >
+                  <option value="">Select State</option>
+                  {Object.keys(locations).map((state) => (
+                    <option key={state} value={state}>
+                      {state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="transform transition-all duration-300 hover:scale-[1.01]">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                City
+              </label>
+              <select
+                name="city"
+                value={formData.city}
+                onChange={handleInputChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                required
+                disabled={!formData.state}
+              >
+                <option value="">Select City</option>
+                {formData.state &&
+                  locations[formData.state].map((city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Menu Type */}
+          <div className="transform transition-all duration-300 hover:scale-[1.01]">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Menu Preference
             </label>
-            <div className="space-y-6">
-              {/* Venue Need Selection */}
-              <div>
-                <div className="flex gap-4">
-                  <button
-                    onClick={() => setNeedVenue(true)}
-                    className={`px-4 py-2 rounded-md transition-colors ${
-                      needVenue
-                        ? "bg-amber-900 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    onClick={() => {
-                      setNeedVenue(false);
-                      setSelectedState("");
-                      setSelectedCity("");
-                    }}
-                    className={`px-4 py-2 rounded-md transition-colors ${
-                      !needVenue
-                        ? "bg-amber-900 text-white"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    }`}
-                  >
-                    No
-                  </button>
-                </div>
-              </div>
-
-              {/* State Selection */}
-              {needVenue && (
-                <div>
-                  <label
-                    htmlFor="state"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Select State
-                  </label>
-                  <select
-                    id="state"
-                    value={selectedState}
-                    onChange={(e) => handleStateChange(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="">Select a state</option>
-                    {states.map((state) => (
-                      <option key={state} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
-
-              {/* City Selection */}
-              {needVenue && selectedState && (
-                <div>
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Select City
-                  </label>
-                  <select
-                    id="city"
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                  >
-                    <option value="">Select a city</option>
-                    {cities[selectedState].map((city) => (
-                      <option key={city} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
-
-              {/* Selection Summary */}
-              {needVenue && selectedState && selectedCity && (
-                <div className="mt-6 p-4 bg-indigo-50 rounded-lg">
-                  <h2 className="text-lg font-semibold text-indigo-900 mb-2">
-                    Your Selection
-                  </h2>
-                  <p className="text-indigo-700">
-                    {selectedCity}, {selectedState}
-                  </p>
-                </div>
-              )}
+            <div className="relative">
+              <Utensils className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <select
+                name="menuType"
+                value={formData.menuType}
+                onChange={handleInputChange}
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                required
+              >
+                <option value="">Select Menu Type</option>
+                <option value="veg">Vegetarian</option>
+                <option value="nonveg">Non-Vegetarian</option>
+                <option value="both">Both</option>
+              </select>
             </div>
           </div>
 
-          {/* Menu Selection */}
-          <div>
-            <h2 className="text-xl font-medium mb-4  text-amber-900 text-center">
-              Select Menu Items
-            </h2>
-
-            {/* Vegetarian Menu */}
-            <div className="border rounded-lg p-4 mb-4">
-              <h3 className="font-medium text-lg mb-4">Vegetarian Menu</h3>
-
-              {/* Vegetarian Starters */}
-              <div className="mb-6">
-                <h4 className="text-md font-medium  mb-3 text-gray-700">
-                  Starters
-                </h4>
-                {renderMenuItems(menuItems.vegetarianStarters)}
-              </div>
-
-              {/* Vegetarian Main Course */}
-              <div>
-                <h4 className="text-md font-medium mb-3 text-gray-700">
-                  Main Course
-                </h4>
-                {renderMenuItems(menuItems.vegetarianMain)}
-              </div>
+          {/* Menu Selection for Veg */}
+          {formData.menuType === "veg" && (
+            <div className="space-y-6 animate-fade-in">
+              {Object.entries(menuOptions.veg).map(([category, items]) => (
+                <div
+                  key={category}
+                  className="border-t pt-4 transform transition-all duration-300 hover:scale-[1.01]"
+                >
+                  <h3 className="text-lg font-medium text-gray-800 mb-3 capitalize">
+                    {category}
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {items.map((item) => (
+                      <label
+                        key={item}
+                        className="flex items-center space-x-2 text-sm group cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData.selectedItems[category].includes(
+                            item
+                          )}
+                          onChange={() => handleMenuSelection(category, item)}
+                          className="rounded text-purple-600 focus:ring-purple-500 transition-all duration-300"
+                        />
+                        <span className="group-hover:text-purple-600 transition-colors duration-300">
+                          {item}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-
-            {/* Non-Vegetarian Menu */}
-            <div className="border rounded-lg p-4 mb-4">
-              <h3 className="font-medium text-lg mb-4">Non-Vegetarian Menu</h3>
-
-              {/* Non-Veg Starters */}
-              <div className="mb-6">
-                <h4 className="text-md font-medium mb-3 text-gray-700">
-                  Starters
-                </h4>
-                {renderMenuItems(menuItems.nonVegStarters)}
-              </div>
-
-              {/* Non-Veg Main Course */}
-              <div>
-                <h4 className="text-md font-medium mb-3 text-gray-700">
-                  Main Course
-                </h4>
-                {renderMenuItems(menuItems.nonVegMain)}
-              </div>
+          )}
+          {/* Menu for NOn veg */}
+          {formData.menuType === "nonveg" && (
+            <div className="space-y-6 animate-fade-in">
+              {Object.entries(menuOptions.Nonveg).map(([category, items]) => (
+                <div
+                  key={category}
+                  className="border-t pt-4 transform transition-all duration-300 hover:scale-[1.01]"
+                >
+                  <h3 className="text-lg font-medium text-gray-800 mb-3 capitalize">
+                    {category}
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {items.map((item) => (
+                      <label
+                        key={item}
+                        className="flex items-center space-x-2 text-sm group cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData.selectedItems[category].includes(
+                            item
+                          )}
+                          onChange={() => handleMenuSelection(category, item)}
+                          className="rounded text-purple-600 focus:ring-purple-500 transition-all duration-300"
+                        />
+                        <span className="group-hover:text-purple-600 transition-colors duration-300">
+                          {item}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
+          )}
 
-            {/* Desserts */}
-            <div className="border rounded-lg p-4 mb-4">
-              <h3 className="font-medium text-lg mb-3">Desserts</h3>
-              {renderMenuItems(menuItems.desserts)}
-            </div>
+          {/*Included Services */}
 
-            {/* Beverages */}
-            <div className="border rounded-lg p-4 mb-4">
-              <h3 className="font-medium text-lg mb-3">Beverages</h3>
-              {renderMenuItems(menuItems.beverages)}
+          <div className="">
+            <div className="container mx-auto justify-center">
+              <div className=" gap-6">
+                {serviceCategories.map((service, index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+                  >
+                    {/* {service.icon} */}
+                    <h3 className="text-lg font-medium text-gray-700 mb-1">
+                      {service.title}
+                    </h3>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-center text-gray-700 text-sm "
+                        >
+                          <svg
+                            className="w-4 h-4 mr-2 text-blue-500"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-          
-
-          {/* Total Price */}
-          {/* <div className="border-t pt-4">
-            <div className="flex justify-between items-center font-medium text-2xl  text-amber-900 text-center">
-              <span>Total Estimated Price:</span>
-              <span>${calculateTotal()}</span>
-            </div>
-          </div> */}
-
-
-         
-          
 
           {/* Submit Button */}
           <div className="flex justify-end">
