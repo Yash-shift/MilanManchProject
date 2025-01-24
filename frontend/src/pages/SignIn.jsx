@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import ReCAPTCHA from "react-google-recaptcha";
+import AuthContext from "../context/AuthContext";
 import BackButton from '../components/BackButton';
-
-
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -11,17 +9,13 @@ const SignIn = () => {
   
   const navigate = useNavigate();
 
-  const [captchaValue, setCaptchaValue] = useState(null);
-  const handleCaptcha = (value) => {
-    setCaptchaValue(value);
-  };
-  
-
+  const { login } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      
+      await login(email, password);
+      navigate('/');
     } catch (error) {
       console.error('Failed to sign in:', error);
     }
@@ -29,7 +23,6 @@ const SignIn = () => {
 
   return (
     <div className="min-h-screen pt-20 pb-16 flex items-center bg-amber-50">
-      
       <div className="max-w-md w-full mx-auto px-4">
         <div className="bg-white p-8 rounded-xl shadow-lg">
           <h2 className="text-3xl font-bold text-amber-900 text-center mb-8">Sign In</h2>
@@ -54,12 +47,6 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
-              />
-            </div>
-            <div className="mb-4">
-              <ReCAPTCHA
-                sitekey="6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9"
-                onChange={handleCaptcha}
               />
             </div>
             <button

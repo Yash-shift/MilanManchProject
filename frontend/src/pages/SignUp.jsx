@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useAuth } from "../context/AuthContext";
 import BackButton from "../components/BackButton";
-// 6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9  site key
-// 6Le4QLoqAAAAABteXVNy3jT_V9VrZpzuoKeIirU9   secret key
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -11,42 +9,58 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
   const [confirm, setconfirm] = useState("");
-  // const[errors,setErrors] = useState();
-  const [captchaValue, setCaptchaValue] = useState(null);
-  const handleCaptcha = (value) => {
-    setCaptchaValue(value);
-  };
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  // const validateForm=()=>{}
+  const { register } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
+
     try {
-      if (!captchaValue) {
-        alert("Please verify the CAPTCHA");
+      // Validate form data
+      if (!name || !email || !password || !number) {
+        setErrorMessage("Please fill in all fields");
+        return;
       }
-      // await signUp(email, password, name);
-      // navigate('/');
-      // const isValid = validateForm();
-      // if(isValid){
-      //   alert("Form Submitted")
-      //   console.log(email, password, name)
-      // }else{
-      //   alert("Form Invalid")
-      // }
+
+      if (password !== confirm) {
+        setErrorMessage("Passwords do not match");
+        return;
+      }
+
+      if (password.length < 6) {
+        setErrorMessage("Password must be at least 6 characters");
+        return;
+      }
+
+      if (!/^\d{10}$/.test(number)) {
+        setErrorMessage("Please enter a valid 10-digit phone number");
+        return;
+      }
+
+      console.log('Submitting form data:', { name, email, password, number }); // Debug log
+      
+      await register(name, email, password, number);
+      navigate('/');
     } catch (error) {
+      setErrorMessage(error.message);
       console.error("Failed to sign up:", error);
     }
   };
 
   return (
     <div className="min-h-screen pt-20 pb-16 flex items-center bg-amber-50">
-      
       <div className="max-w-md w-full mx-auto px-4">
         <div className="bg-white p-8 rounded-xl shadow-lg">
           <h2 className="text-3xl font-bold text-amber-900 text-center mb-8">
             Sign Up
           </h2>
+          {errorMessage && (
+            <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">
+              {errorMessage}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
@@ -127,12 +141,6 @@ const SignUp = () => {
                 onChange={(e) => setconfirm(e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 p-1 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                 required
-              />
-            </div>
-            <div className="mb-4">
-              <ReCAPTCHA
-                sitekey="6Le4QLoqAAAAACGRm0-pcx_dz2sHhkVN7kiSKfJ9"
-                onChange={handleCaptcha}
               />
             </div>
             <button
