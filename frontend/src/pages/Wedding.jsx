@@ -16,7 +16,7 @@ const Wedding = () => {
   const features = [
     {
       icon: <PartyPopper className="h-8 w-8 text-amber-600" />,
-      title: "Traditional Hindu Wedding",
+      title: "Traditional Wedding",
       description:
         "Experience the beauty and rituals of a traditional Hindu wedding.",
       link: "/functions",
@@ -27,14 +27,14 @@ const Wedding = () => {
       description:
         "Plan your perfect wedding at breathtaking locations around the world.",
         
-      link: "/functions"
+      link: "/destination"
     },
     {
       icon: <Music className="h-8 w-8 text-amber-600" />,
       title: "Themed Wedding",
       description:
         "Create unforgettable memories with unique themes and creative designs.",
-      link: "/functions"
+      // link: "/functions"
     },
     {
       icon: <PartyPopper className="h-8 w-8 text-amber-600" />,

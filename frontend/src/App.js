@@ -23,6 +23,7 @@ import BackButton from "./components/BackButton";
 import sameday from "./pages/WeddingSubTypes/SameDay";
 import Sameday from "./pages/WeddingSubTypes/SameDay";
 import { AuthProvider } from "./context/AuthContext";
+import Destination from "./pages/WeddingSubTypes/Destination";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/functions" element={<Functions/>} />
             <Route path="/sameday" element={<Sameday/>}/>
+            <Route path="/destination" element={<Destination/>} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
           <Footer></Footer>

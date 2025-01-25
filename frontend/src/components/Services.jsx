@@ -23,7 +23,7 @@ const Services = () => {
       icon: <Gift className="h-8 w-8 text-amber-600" />,
       title: "Social Gathering",
       description: "Host Birthday, Anniversary and other special events in style.",
-      link: "/social",
+      link: "/booking",
     },
   ];
 

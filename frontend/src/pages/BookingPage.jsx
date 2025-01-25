@@ -8,6 +8,7 @@ import {
   Phone,
   Flower,
   Ticket,
+  Building2,
 } from "lucide-react";
 
 const EventBookingForm = () => {
@@ -18,7 +19,6 @@ const EventBookingForm = () => {
     contactNumber: "",
     eventType: "",
     eventDate: "",
-
     state: "",
     city: "",
     menuType: "",
@@ -43,6 +43,13 @@ const EventBookingForm = () => {
         "Corn Cheese Balls",
         "Crispy Vegetables",
         "Hara Bhara Kebab",
+        " Chilli Paneer",
+        "Aloo Tikki Chaat",
+        "Veg Seekh Kebab",
+        "Stuffed Mushrooms",
+        "Dahi Ke Kebab",
+        "Tandoori Baby Corn",
+        "Pani Puri Shots",
       ],
       mainCourse: [
         "Dal Makhani",
@@ -54,6 +61,13 @@ const EventBookingForm = () => {
         "Jeera Rice",
         "Butter Naan",
         "Garlic Roti",
+        "Aloo Gobi Masala",
+        "Shahi Paneer",
+        "Veg Pulao",
+        "Tandoori Roti",
+        "Stuffed Kulcha",
+        "Kashmiri Dum Aloo",
+        "Methi Malai Mutter",
       ],
       beverages: [
         "Fresh Lime Soda",
@@ -76,23 +90,39 @@ const EventBookingForm = () => {
     },
     Nonveg: {
       starters: [
-        "Chicken pop",
-        "Veg Spring Rolls",
-        "Mushroom Manchurian",
-        "Corn Cheese Balls",
-        "Crispy Vegetables",
-        "Hara Bhara Kebab",
+        "Chicken Pop",
+        "Chicken Tikka",
+        "Chicken Wings",
+        "Mutton Seekh Kebab",
+        "Fish Fingers",
+        "Tandoori Prawns",
+        "Chicken Lollipop",
+        "Malai Chicken Tikka",
+        "Fish Amritsari",
+        "Prawn Tempura",
+        "Chicken Shami Kebab",
+        "Tandoori Chicken",
+        "Mutton Galouti Kebab",
+        "Lemon Garlic Prawns",
       ],
       mainCourse: [
-        "Dal Makhani",
-        "Paneer Butter Masala",
-        "Veg Biryani",
-        "Palak Paneer",
-        "Mixed Veg Curry",
-        "Malai Kofta",
+        "Butter Chicken",
+        "Chicken Curry",
+        "Mutton Rogan Josh",
+        "Fish Curry",
+        "Egg Curry",
+        "Chicken Biryani",
+        "Mutton Biryani",
+        "Prawns Biryani",
+        "Keema Curry",
+        "Kadhai Chicken",
+        "Chicken Chettinad",
+        "Mutton Vindaloo",
+        "Fish Malabar Curry",
         "Jeera Rice",
         "Butter Naan",
         "Garlic Roti",
+        "Tandoori Roti",
       ],
       beverages: [
         "Fresh Lime Soda",
@@ -115,9 +145,6 @@ const EventBookingForm = () => {
     },
   };
 
-  const [selectedState, setSelectedState] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -138,21 +165,6 @@ const EventBookingForm = () => {
     }));
   };
 
-  const handleStateChange = (state) => {
-    setSelectedState(state);
-    setSelectedCity(""); // Reset city when state changes
-  };
-
-  const decorationTypes = [
-    "Floral",
-    "Vintage",
-    "Luxury",
-    "Traditional",
-    "Fairy_lights",
-    "Modern",
-    "Minimalist",
-    "Royal",
-  ];
   const stageDecorations = [
     "Floral",
     "Vintage",
@@ -180,10 +192,6 @@ const EventBookingForm = () => {
   ];
 
   const locations = {
-    Maharashtra: ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
-    Karnataka: ["Bangalore", "Mysore", "Hubli", "Mangalore", "Belgaum"],
-    "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Trichy"],
-    Gujarat: ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Gandhinagar"],
     Delhi: [
       "New Delhi",
       "North Delhi",
@@ -191,29 +199,21 @@ const EventBookingForm = () => {
       "East Delhi",
       "West Delhi",
     ],
+    "Uttar Pradesh": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Noida"],
+    Rajasthan: ["Jaipur", "Udaipur", "Jodhpur", "Jaisalmer", "Pushkar"],
   };
   const serviceCategories = [
     {
       icon: <Ticket className="w-10 h-10 text-blue-600 mb-4" />,
       title: "Inclusive services",
       features: [
-        "Printed invitation cards.",
-        "Capture moments.",
-        "All Royal decoration and arrangements.",
-
-        "All fun and entertainment",
+        " Beautiful printed invitation cards.",
+        "Capture special moments.",
+        "Royal decorations and arrangements.",
+        "Fun and entertainment for everyone.",
       ],
     },
   ];
-
-  const handleMenuChange = (menuId) => {
-    setFormData((prev) => ({
-      ...prev,
-      selectedMenuItems: prev.selectedMenuItems.includes(menuId)
-        ? prev.selectedMenuItems.filter((id) => id !== menuId)
-        : [...prev.selectedMenuItems, menuId],
-    }));
-  };
 
   return (
     <div className="w-full mx-auto p-6 bg-amber-50">
@@ -285,8 +285,6 @@ const EventBookingForm = () => {
               </div>
             </div>
           </div>
-
-          
 
           {/* Wedding Date */}
           <div className="transform transition-all duration-300 hover:scale-[1.01]">
@@ -368,51 +366,87 @@ const EventBookingForm = () => {
             </select>
           </div>
 
-          {/* Venue Selection */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="transform transition-all duration-300 hover:scale-[1.01]">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                State
-              </label>
-              <div className="relative">
-                <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                  className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  required
-                >
-                  <option value="">Select State</option>
-                  {Object.keys(locations).map((state) => (
-                    <option key={state} value={state}>
-                      {state}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+          {/* state and venue selction */}
 
-            <div className="transform transition-all duration-300 hover:scale-[1.01]">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                City
-              </label>
-              <select
-                name="city"
-                value={formData.city}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                required
-                disabled={!formData.state}
-              >
-                <option value="">Select City</option>
-                {formData.state &&
-                  locations[formData.state].map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-              </select>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white shadow rounded-lg p-6">
+              {/* Venue Selection */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="transform transition-all duration-300 hover:scale-[1.01]">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    State
+                  </label>
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <select
+                      name="state"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      required
+                    >
+                      <option value="">Select State</option>
+                      {Object.keys(locations).map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="transform transition-all duration-300 hover:scale-[1.01]">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    City
+                  </label>
+                  <select
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    required
+                    disabled={!formData.state}
+                  >
+                    <option value="">Select City</option>
+                    {formData.state &&
+                      locations[formData.state].map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+
+                <div className="transform transition-all duration-300 hover:scale-[1.01] md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Venue Preference
+                  </label>
+                  <div className="relative">
+                    <Building2 className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <select
+                      name="venueType"
+                      value={formData.venueType}
+                      onChange={handleInputChange}
+                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      required
+                      disabled={!formData.city}
+                    >
+                      <option value="">Select Venue Type</option>
+                      <option value="hotel">Hotel Banquet Hall</option>
+                      <option value="conference">Conference Center</option>
+                      <option value="garden">Garden/Outdoor Venue</option>
+                      <option value="restaurant">
+                        Restaurant Private Room
+                      </option>
+                      <option value="theater">Theater/Auditorium</option>
+                      <option value="rooftop">Rooftop Venue</option>
+                      <option value="museum">Museum/Gallery Space</option>
+                      <option value="beach">Beach Resort</option>
+                      <option value="historic">Historic Building</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -555,9 +589,9 @@ const EventBookingForm = () => {
             <button
               type="submit"
               className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              disabled={
-                !formData.eventType || !formData.eventDate || !formData.venue
-              }
+              // disabled={
+              //   !formData.eventType || !formData.eventDate || !formData.contactNumber
+              // }
             >
               Book Now
             </button>
