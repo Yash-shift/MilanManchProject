@@ -66,7 +66,7 @@ const Wedding = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-amber-900 mb-16">
-            Types of Wedding
+            Functions We Offer.
           </h2>
         </div>
 {/* onClick={() => navigate("/booking")} */}
