@@ -16,7 +16,7 @@ const Services = () => {
       icon: <Users2 className="h-8 w-8 text-amber-600" />,
       title: "Corporate Events",
       description: "Professional events tailored for your corporate needs.",
-      link: "/corporate",
+      // link: "/corporate",
     },
     {
       id: 3,

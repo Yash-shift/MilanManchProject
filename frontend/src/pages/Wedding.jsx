@@ -19,7 +19,7 @@ const Wedding = () => {
       title: "Traditional Wedding",
       description:
         "Experience the beauty and rituals of a traditional Hindu wedding.",
-      link: "/functions",
+      link: "/traditional",
     },
     {
       icon: <Home className="h-8 w-8 text-amber-600" />,

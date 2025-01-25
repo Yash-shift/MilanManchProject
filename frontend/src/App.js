@@ -24,6 +24,7 @@ import sameday from "./pages/WeddingSubTypes/SameDay";
 import Sameday from "./pages/WeddingSubTypes/SameDay";
 import { AuthProvider } from "./context/AuthContext";
 import Destination from "./pages/WeddingSubTypes/Destination";
+import Traditional from "./pages/WeddingSubTypes/Traditional";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/functions" element={<Functions/>} />
             <Route path="/sameday" element={<Sameday/>}/>
             <Route path="/destination" element={<Destination/>} />
+            <Route path="/traditional" element={<Traditional />} />
             {/* <Route path="*" element={<NotFound />} /> */}
           </Routes>
           <Footer></Footer>

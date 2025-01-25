@@ -144,7 +144,7 @@ const stageDecorations = [
   "Royal",
 ];
 
-function Sameday() {
+function Traditional() {
   const [formData, setFormData] = useState({
     groomName: "",
     brideName: "",
@@ -206,7 +206,7 @@ function Sameday() {
           <div className="text-center mb-8 animate-fade-in">
             <Heart className="w-12 h-12 text-amber-600 mx-auto mb-4 animate-pulse" />
             <h1 className="text-4xl font-bold text-amber-900 mb-2">
-              Same Day Event Planning
+             Traditional Wedding Booking 
             </h1>
             <p className="text-amber-600">
               Create your perfect wedding celebration
@@ -589,4 +589,4 @@ function Sameday() {
   );
 }
 
-export default Sameday;
+export default Traditional;
