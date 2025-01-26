@@ -286,10 +286,10 @@ const EventBookingForm = () => {
             </div>
           </div>
 
-          {/* Wedding Date */}
+          {/* Date */}
           <div className="transform transition-all duration-300 hover:scale-[1.01]">
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Wedding Date
+              Event Date
             </label>
             <div className="relative">
               <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
