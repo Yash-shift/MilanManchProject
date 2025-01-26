@@ -12,6 +12,7 @@ import {
   User,
   Flower,
   Ticket,
+  Building2
 } from "lucide-react";
 
 // Enhanced menu options
@@ -351,51 +352,87 @@ function Sameday() {
 
            
 
-            {/* Venue Selection */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="transform transition-all duration-300 hover:scale-[1.01]">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  State
-                </label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                  <select
-                    name="state"
-                    value={formData.state}
-                    onChange={handleInputChange}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                    required
-                  >
-                    <option value="">Select State</option>
-                    {Object.keys(locations).map((state) => (
-                      <option key={state} value={state}>
-                        {state}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+           {/* state and venue selction */}
 
-              <div className="transform transition-all duration-300 hover:scale-[1.01]">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  City
-                </label>
-                <select
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
-                  required
-                  disabled={!formData.state}
-                >
-                  <option value="">Select City</option>
-                  {formData.state &&
-                    locations[formData.state].map((city) => (
-                      <option key={city} value={city}>
-                        {city}
-                      </option>
-                    ))}
-                </select>
+           <div className="max-w-full mx-auto">
+              <div className="bg-white shadow rounded-lg p-6">
+                {/* Venue Selection */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="transform transition-all duration-300 hover:scale-[1.01]">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Select Your State
+                    </label>
+                    <div className="relative">
+                      <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <select
+                        name="state"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                        className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                        required
+                      >
+                        <option value="">Select State</option>
+                        {Object.keys(locations).map((state) => (
+                          <option key={state} value={state}>
+                            {state}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="transform transition-all duration-300 hover:scale-[1.01]">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      City
+                    </label>
+                    <select
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                      required
+                      disabled={!formData.state}
+                    >
+                      <option value="">Select City</option>
+                      {formData.state &&
+                        locations[formData.state].map((city) => (
+                          <option key={city} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+
+                  <div className="transform transition-all duration-300 hover:scale-[1.01] md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Venue Preference
+                    </label>
+                    <div className="relative">
+                      <Building2 className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                      <select
+                        name="venueType"
+                        value={formData.venueType}
+                        onChange={handleInputChange}
+                        className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                        required
+                        disabled={!formData.city}
+                      >
+                        <option value="">Select Venue Type</option>
+                        <option value="hotel">Hotel Banquet Hall</option>
+                        <option value="conference">Conference Center</option>
+                        <option value="garden">Garden/Outdoor Venue</option>
+                        <option value="restaurant">
+                          Restaurant Private Room
+                        </option>
+                        <option value="theater">Theater/Auditorium</option>
+                        <option value="rooftop">Rooftop Venue</option>
+                        <option value="museum">Museum/Gallery Space</option>
+                        <option value="beach">Beach Resort</option>
+                        <option value="historic">Historic Building</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
